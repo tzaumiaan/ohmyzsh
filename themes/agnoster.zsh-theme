@@ -207,11 +207,17 @@ prompt_dir() {
   prompt_segment blue $CURRENT_FG '%~'
 }
 
-# Virtualenv: current working virtualenv
+# Current working virtualenv
 prompt_virtualenv() {
+  # virtualenvwrapper
   local virtualenv_path="$VIRTUAL_ENV"
   if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
     prompt_segment blue yellow "(`basename $virtualenv_path`)"
+  fi
+  # conda env
+  local conda_env="$CONDA_DEFAULT_ENV"
+  if [[ -n $conda_env ]]; then
+    prompt_segment blue gray "($conda_env)"
   fi
 }
 
